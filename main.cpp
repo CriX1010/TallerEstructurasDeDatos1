@@ -1,16 +1,19 @@
 #include <iostream>
 using namespace std;
 #include "Alumnos.h"
+#include <vector>
 
 int main() {
 
-    cout << "hello world" << endl;
 
-    Alumnos A1("Cristian");
+    Alumno* A2 = new Alumno(1,"a","b","c","d");
 
-    cout << A1.getNombre() << endl;
 
-    cout << A1.getEdad() << endl;
+
+    vector<Alumno*> Alumnos;
+    Alumnos.push_back(A2);
+
+    cout << Alumnos[0] -> getNombre() << endl;
 
     return 0;
 }

@@ -3,13 +3,29 @@
 #include <string>
 using namespace std;
 
-class Alumnos {
+class Alumno {
+private:
+    int Id;
+    string Nombre;
+    string Apellido;
+    string Carrera;
+    string FechaDeIngreso;
 
-    private:
-        string nombre;
-        int edad;
 public:
-    Alumnos(string);
+    Alumno(int id, string nombre, string apellido, string carrera, string fechaIngreso);
+
+    int getId();
     string getNombre();
-    int getEdad();
+    string getApellido();
+    string getCarrera();
+    string getFechaDeIngreso();
+
+    void setNombre(string nombre);
+    void setApellido(string apellido);
+    void setCarrera(string carrera);
+    void setFechaDeIngreso(string fechaIngreso);
+
+    void mostrarInfo();
+
+    ~Alumno();
 };
