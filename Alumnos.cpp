@@ -6,5 +6,7 @@
 
 Alumnos::Alumnos(string nombre) {
     this -> nombre = nombre;
+    edad = 19;
 }
 string Alumnos::getNombre() {return nombre;}
+int Alumnos::getEdad() {return edad;}

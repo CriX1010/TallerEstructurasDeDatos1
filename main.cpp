@@ -10,5 +10,7 @@ int main() {
 
     cout << A1.getNombre() << endl;
 
+    cout << A1.getEdad() << endl;
+
     return 0;
 }
