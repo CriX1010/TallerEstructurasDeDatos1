@@ -5,4 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(EstructuraDeDatos26 main.cpp
         Alumnos.cpp
-        Alumnos.h)
+        Alumnos.h
+        Cursos.cpp
+        Cursos.h
+        Sistema.cpp
+        Sistema.h)

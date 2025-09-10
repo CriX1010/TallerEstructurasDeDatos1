@@ -4,12 +4,12 @@ using namespace std;
 #include <iostream>
 #include <string>
 
-Alumno::Alumno(int Id, string Nombre, string Apellido, string Carrera, string FechaIngreso) {
-    this -> Id = Id;
-    this ->Nombre = Nombre;
-    this ->Apellido = Apellido;
-    this ->Carrera = Carrera
-    ;this ->FechaDeIngreso = FechaIngreso;
+Alumno::Alumno(int id, string nombre, string apellido, string carrera, string fechaIngreso) {
+    Id = id;
+    Nombre = nombre;
+    Apellido = apellido;
+    Carrera = carrera;
+    FechaDeIngreso = fechaIngreso;
 }
 
 int Alumno::getId() { return Id; }
