@@ -6,6 +6,7 @@ Sistema::Sistema() {
 }
 void Sistema::CrearAlumno() {
     cout << "Entraste a Crear Alumno" << endl << endl;
+
     return;
 }
 void Sistema::BuscarAlumno() {
