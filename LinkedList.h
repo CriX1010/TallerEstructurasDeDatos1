@@ -51,6 +51,26 @@ public:
         }
     }
 
+    void saltar(T valor) {
+        if (!head) return;
+
+        if (head-> dato == valor) {
+            Nodo<T>* temp = head;
+            head = head->siguiente;
+            return;
+        }
+
+        Nodo<T>* actual = head;
+        while (actual->siguiente && actual->siguiente->dato != valor) {
+            actual = actual->siguiente;
+        }
+
+        if (actual->siguiente) {
+            Nodo<T>* temp = actual->siguiente;
+            actual->siguiente = actual->siguiente->siguiente;
+        }
+    }
+
     void mostrar() {
         Nodo<T>* temp = head;
         while (temp != nullptr) {

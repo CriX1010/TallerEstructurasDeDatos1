@@ -32,3 +32,7 @@ void Curso::mostrarInfo() {
     cout << "Profesor: " << Profesor << endl;
 }
 Curso::~Curso() {}
+
+void Curso::AlumnoInscrito() {
+    MaxEstudiantes = MaxEstudiantes - 1;
+}

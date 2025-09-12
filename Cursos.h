@@ -28,6 +28,7 @@ public:
     void setProfesor(string profesor);
     bool operator==(const Curso &otro) const;
     void mostrarInfo();
+    void AlumnoInscrito();
 
     ~Curso();
 };

@@ -1,6 +1,8 @@
 
+#include <stdint.h>
 using namespace std;
 #include "Alumnos.h"
+#include "Cursos.h"
 #include <iostream>
 #include <string>
 
@@ -14,6 +16,7 @@ Alumno::Alumno(string nombre, string apellido, string carrera, string fechaIngre
 }
 
 int Alumno::staticId = 1;
+LinkedList<Inscripcion*> Inscripciones;
 
 int Alumno::getId() { return Id; }
 string Alumno::getNombre()  { return Nombre; }
@@ -26,7 +29,10 @@ void Alumno::setApellido(string apellido) { Apellido = apellido; }
 void Alumno::setCarrera(string carrera) { Carrera = carrera; }
 void Alumno::setFechaDeIngreso(string fechaIngreso) { FechaDeIngreso = fechaIngreso; }
 
-
+void Alumno::InscribirAlumno(Curso* C) {
+    Inscripcion Ins = Inscripcion(C);
+    Inscripciones.insertarFinal(&Ins);
+}
 
 
 void Alumno::mostrarInfo() {

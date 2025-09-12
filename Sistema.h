@@ -12,6 +12,7 @@ public:
 
     Sistema();
     int CtrlErrInt(bool x);
+    double CtrlErrDouble(bool x);
     bool CompInt(string a);
     void CrearAlumno();
     void BuscarAlumno();

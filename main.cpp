@@ -18,6 +18,8 @@ Sistema S;
 #include "Alumnos.h"
 int main() {
 
+    S.CrearDatosPrueba();
+
     int Comprobador = -1;
 
     while (Comprobador != 6) {
@@ -132,7 +134,7 @@ void ManejoDeInscripciones() {
         cout << "2- Eliminar un alumno de un Curso" << endl;
         cout << "3- Volver al menu principal" << endl;
         cout << "Introduzca un numero: ";
-        Eleccion = S.CtrlErrInt(true);
+        Eleccion = S.CtrlErrInt(false);
 
         switch (Eleccion) {
             case 1:

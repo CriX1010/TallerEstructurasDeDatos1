@@ -12,4 +12,6 @@ add_executable(EstructuraDeDatos26 main.cpp
         Sistema.h
         Nodo.h
         LinkedList.h
+        Inscripcion.cpp
+        Inscripcion.h
 )
