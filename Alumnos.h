@@ -1,6 +1,7 @@
 
 #pragma once
 #include <string>
+#include "LinkedList.h"
 using namespace std;
 
 class Alumno {
@@ -10,9 +11,9 @@ private:
     string Apellido;
     string Carrera;
     string FechaDeIngreso;
-
 public:
-    Alumno(int id, string nombre, string apellido, string carrera, string fechaIngreso);
+    int static staticId;
+    Alumno(string nombre, string apellido, string carrera, string fechaIngreso);
 
     int getId();
     string getNombre();
@@ -24,6 +25,7 @@ public:
     void setApellido(string apellido);
     void setCarrera(string carrera);
     void setFechaDeIngreso(string fechaIngreso);
+    void InscribirCurso(Curso C);
 
     void mostrarInfo();
 

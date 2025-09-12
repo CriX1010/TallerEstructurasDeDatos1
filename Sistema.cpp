@@ -1,60 +1,249 @@
 #include "Sistema.h"
 #include <iostream>
+#include "LinkedList.h"
+
 using namespace std;
 
-Sistema::Sistema() {
-}
-void Sistema::CrearAlumno() {
-    cout << "Entraste a Crear Alumno" << endl << endl;
+LinkedList<Alumno*> AlumnosList;
+LinkedList<Curso*> CursosList;
 
-    return;
+void Sistema::CrearDatosPrueba() {
+    AlumnosList.insertarFinal(new Alumno("Cristian","Perez","ICCI","10102005"));
+    AlumnosList.insertarFinal(new Alumno("Lucia","Cortes","Medicina","01082005"));
+    AlumnosList.insertarFinal(new Alumno("Catalina","Gonzales","ICI","24092005"));
+    AlumnosList.insertarFinal(new Alumno("Catalina","Perez","Enfermeria","24012001"));
+
+    CursosList.insertarFinal(new Curso("Electrodinamica",40,"ICCI","Hector Léon"));
+    CursosList.insertarFinal(new Curso("Programacion",30,"ICCI","Rabi"));
+    CursosList.insertarFinal(new Curso("Estadistica",50,"ICI","Bahamonde"));
+    CursosList.insertarFinal(new Curso("Economia",20,"ICI","Diego Rojas"));
+}
+///////////////////
+
+
+int Sistema::CtrlErrInt(bool x) {
+    int numero;
+    while (true) {
+        if (x) {
+        cout << "Introduzca un numero: ";
+        }
+        cin >> numero;
+
+        if (cin.fail()) {
+            cin.clear();
+            char basura;
+            while (cin.get(basura) && basura != '\n') {}
+            cout << "Entrada invalida. Intente de nuevo." << endl;
+        } else {
+            char basura;
+            while (cin.get(basura) && basura != '\n') {}
+            return numero;
+        }
+    }
+}
+bool Sistema::CompInt(string a) {
+    try {
+        int n = stoi(a);
+        return true;
+    } catch (invalid_argument& e) {
+        return false;
+    } catch (out_of_range& e) {
+        return false;
+    }
+}
+
+Sistema::Sistema() {}
+
+void Sistema::CrearAlumno() {
+
+    cout << "Entraste a Crear Alumno" << endl;
+    string nombre;
+    string apellido;
+    string carrera;
+    string fechaDeIngreso;
+
+    cout << "Introduce el nombre del alumno: " ;
+    cin >> nombre;
+    cout << "Introduce el apellido del alumno: " ;
+    cin >> apellido;
+    cout << "Introduce la carrera del alumno: " ;
+    cin >> carrera;
+    cout << "Introduce la fecha de ingreso del alumno: " ;
+    cin >> fechaDeIngreso;
+
+    AlumnosList.insertarFinal(new Alumno(nombre,apellido,carrera,fechaDeIngreso));
 }
 void Sistema::BuscarAlumno() {
+
     cout << "Entraste a Buscar Alumno" << endl << endl;
-    return;
+    cout << "Introduzca el ID o nombre: ";
+
+    string Busqueda;
+    int cont = 0;
+    cin >> Busqueda;
+
+    if (CompInt(Busqueda)) {
+        for (int i = 0; i < AlumnosList.size(); i++) {
+            if (AlumnosList.getObject(i)->getId() == stoi(Busqueda)) {
+                AlumnosList.getObject(i)->mostrarInfo();
+                cont+=1;
+                cout << endl;
+            }
+
+        }
+    }
+    else {
+        for (int i = 0; i < AlumnosList.size(); i++) {
+            if (AlumnosList.getObject(i)->getNombre() == Busqueda) {
+                AlumnosList.getObject(i)->mostrarInfo();
+                cont+=1;
+                cout << endl;
+            }
+        }
+    }
+    if (cont==0) {cout << "No se encontraron candidatos" << endl << endl;}
 }
 void Sistema::EliminarAlumno() {
+
     cout << "Entraste a Eliminar Alumno" << endl << endl;
-    return;
+
+    cout << "Introduzca el ID del Alumno a Eliminar: ";
+
+    int Busqueda;
+    Busqueda = CtrlErrInt(false);
+
+    for (int i = 0; i < AlumnosList.size(); i++) {
+        if (AlumnosList.getObject(i)->getId() == Busqueda) {
+            cout << "Alumno a eliminar:" << endl;
+            AlumnosList.getObject(i)->mostrarInfo();
+            AlumnosList.eliminar(AlumnosList.getObject(i));
+            cout << endl;
+        }
+    }
 }
+
 void Sistema::CrearCurso() {
     cout << "Entraste a Crear Curso" << endl << endl;
-    return;
+
+    string nombre;
+    int MaxEstudiantes;
+    string carrera;
+    string Profesor;
+
+    cout << "Introduce el nombre del Curso: " ;
+    cin >> nombre;
+    cout << "Introduce el Maximo de Alumnos: " ;
+    MaxEstudiantes = CtrlErrInt(false);
+    cout << "Introduce la carrera a la que pertenece el Curso: " ;
+    cin >> carrera;
+    cout << "Introduce el nombre del Profesor: " ;
+    cin >> Profesor;
+
+    CursosList.insertarFinal(new Curso(nombre,MaxEstudiantes,carrera,Profesor));
+
 }
 void Sistema::BuscarCurso() {
     cout << "Entraste a Buscar Curso" << endl << endl;
-    return;
+
+    cout << "Introduzca el ID o nombre de el Curso: ";
+
+    string Busqueda;
+    int cont = 0;
+    cin >> Busqueda;
+
+    if (CompInt(Busqueda)) {
+        for (int i = 0; i < CursosList.size(); i++) {
+            if (CursosList.getObject(i)->getCodigo() == stoi(Busqueda)) {
+                CursosList.getObject(i)->mostrarInfo();
+                cont+=1;
+                cout << endl;
+            }
+
+        }
+    }
+    else {
+        for (int i = 0; i < CursosList.size(); i++) {
+            if (CursosList.getObject(i)->getNombre() == Busqueda) {
+                CursosList.getObject(i)->mostrarInfo();
+                cont+=1;
+                cout << endl;
+            }
+        }
+    }
+    if (cont==0) {cout << "No se encontraron coincidencias" << endl << endl;}
+
 }
 void Sistema::EliminarCurso() {
     cout << "Entraste a Eliminar Curso" << endl << endl;
-    return;
+
+    cout << "Introduzca el ID del Curso a Eliminar: ";
+
+    int Busqueda;
+    Busqueda = CtrlErrInt(false);
+
+    for (int i = 0; i < CursosList.size(); i++) {
+        if (CursosList.getObject(i)->getCodigo() == Busqueda) {
+            cout << "Curso a eliminar:" << endl;
+            CursosList.getObject(i)->mostrarInfo();
+            CursosList.eliminar(CursosList.getObject(i));
+            cout << endl;
+        }
+    }
 }
+
 void Sistema::InscribirAlumno() {
     cout << "Entraste a Inscribir Alumno" << endl << endl;
-    return;
+    bool Comprobador = false;
+    int AuxAlumno;
+    int AuxCurso;
+    while (!Comprobador) {
+        cout << "Introduzca el ID del Alumno: ";
+        int Alumno = CtrlErrInt(false);
+
+        for (int i = 0; i < AlumnosList.size(); i++) {
+            if (AlumnosList.getObject(i)->getId() == Alumno) {
+                cout << "Alumno Seleccionado: "<< endl;
+                AlumnosList.getObject(i)->mostrarInfo();
+                AuxAlumno = i;
+                Comprobador = true;
+            }
+        }
+        if (Comprobador == false) { "No se encontraron coincidencias"; }
+    }
+
+    Comprobador = false;
+    while (!Comprobador) {
+        cout << "Introduzca el ID del curso a Inscribir: ";
+        int Curso = CtrlErrInt(false);
+
+        for (int i = 0; i < CursosList.size(); i++) {
+            if (CursosList.getObject(i)->getCodigo() == Curso) {
+                cout << "Curso Seleccionado: "<< endl;
+                CursosList.getObject(i)->mostrarInfo();
+                AuxCurso = i;
+                Comprobador = true;
+            }
+        }
+        if (Comprobador == false) { "No se encontraron coincidencias"; }
+    }
+
 }
 void Sistema::DesInscribirAlumno() {
     cout << "Entraste a DesInscribir Alumno" << endl << endl;
-    return;
 }
 void Sistema::RegistrarNota() {
     cout << "Entraste a Registrar Nota" << endl << endl;
-    return;
 }
 void Sistema::ReporteAlumnosxCarrera() {
     cout << "Entraste a Alumnos por Carrera" << endl << endl;
-    return;
 }
 void Sistema::ReporteCursosxAlumno() {
     cout << "Entraste a Cursos por Alumno" << endl << endl;
-    return;
 }
 void Sistema::ReportePromedioAlumnoxCurso() {
     cout << "Entraste a Promedio Alumno por Curso" << endl << endl;
-    return;
 }
 void Sistema::ReportePromedioAlumno() {
     cout << "Entraste a Promedio Alumno" << endl << endl;
-    return;
 }
 Sistema::~Sistema() {}

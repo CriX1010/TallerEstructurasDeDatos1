@@ -8,7 +8,11 @@ private:
 
 
 public:
+    void CrearDatosPrueba();
+
     Sistema();
+    int CtrlErrInt(bool x);
+    bool CompInt(string a);
     void CrearAlumno();
     void BuscarAlumno();
     void EliminarAlumno();

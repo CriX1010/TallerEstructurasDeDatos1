@@ -14,6 +14,8 @@ int CtrlErrInt();
 
 Sistema S;
 
+#include "LinkedList.h"
+#include "Alumnos.h"
 int main() {
 
     int Comprobador = -1;
@@ -27,7 +29,7 @@ int main() {
         cout << "4- Manejo de Notas:" << endl;
         cout << "5- Consultar Reportes" << endl;
         cout << "6- Salir" << endl;
-        Comprobador = CtrlErrInt();
+        Comprobador = S.CtrlErrInt(true);
 
         switch (Comprobador) {
             case 1:
@@ -57,24 +59,6 @@ int main() {
     return 0;
 }
 
-int CtrlErrInt() {
-    int numero;
-    while (true) {
-        cout << "Introduzca un numero: ";
-        cin >> numero;
-
-        if (cin.fail()) {
-            cin.clear();
-            char basura;
-            while (cin.get(basura) && basura != '\n') {}
-            cout << "Entrada invalida. Intente de nuevo." << endl;
-        } else {
-            char basura;
-            while (cin.get(basura) && basura != '\n') {}
-            return numero;
-        }
-    }
-}
 
 void ManejoDeAlumnos() {
 
@@ -86,8 +70,7 @@ void ManejoDeAlumnos() {
         cout << "2- Buscar Alumno" << endl;
         cout << "3- Eliminar Alumno" << endl;
         cout << "4- Volver al menu principal" << endl;
-        cout << "Introduzca un numero: ";
-        Eleccion = CtrlErrInt();
+        Eleccion = S.CtrlErrInt(true);
 
         switch (Eleccion) {
             case 1:
@@ -119,7 +102,7 @@ void ManejoDeCursos() {
         cout << "3- Eliminar Curso" << endl;
         cout << "4- Volver al menu principal" << endl;
         cout << "Introduzca un numero: ";
-        Eleccion = CtrlErrInt();
+        Eleccion = S.CtrlErrInt(true);
 
         switch (Eleccion) {
             case 1:
@@ -149,7 +132,7 @@ void ManejoDeInscripciones() {
         cout << "2- Eliminar un alumno de un Curso" << endl;
         cout << "3- Volver al menu principal" << endl;
         cout << "Introduzca un numero: ";
-        Eleccion = CtrlErrInt();
+        Eleccion = S.CtrlErrInt(true);
 
         switch (Eleccion) {
             case 1:
@@ -176,7 +159,7 @@ void ManejoDeNotas() {
         cout << "1- Registrar Nota" << endl;
         cout << "2- Volver al menu principal" << endl;
         cout << "Introduzca un numero: ";
-        Eleccion = CtrlErrInt();
+        Eleccion = S.CtrlErrInt(true);
 
         switch (Eleccion) {
             case 1:
@@ -203,7 +186,7 @@ void ConsultarReportes() {
         cout << "4- Promedio General de un Alumno" << endl;
         cout << "5- Volver al menu principal" << endl;
         cout << "Introduzca un numero: ";
-        Eleccion = CtrlErrInt();
+        Eleccion = S.CtrlErrInt(true);
 
         switch (Eleccion) {
             case 1:

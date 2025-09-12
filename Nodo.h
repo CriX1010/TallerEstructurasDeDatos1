@@ -5,5 +5,8 @@ public:
     T dato;
     Nodo<T>* siguiente;
 
-    Nodo(T valor);
+    Nodo(T valor) {
+        dato = valor;
+        siguiente = nullptr;
+    };
 };
