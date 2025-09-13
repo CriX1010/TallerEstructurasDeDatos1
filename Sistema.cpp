@@ -7,19 +7,6 @@ using namespace std;
 LinkedList<Alumno*> AlumnosList;
 LinkedList<Curso*> CursosList;
 
-void Sistema::CrearDatosPrueba() {
-    AlumnosList.insertarFinal(new Alumno("Cristian","Perez","ICCI","10102005"));
-    AlumnosList.insertarFinal(new Alumno("Lucia","Cortes","Medicina","01082005"));
-    AlumnosList.insertarFinal(new Alumno("Catalina","Gonzales","ICI","24092005"));
-    AlumnosList.insertarFinal(new Alumno("Catalina","Perez","Enfermeria","24012001"));
-
-    CursosList.insertarFinal(new Curso("Electrodinamica",40,"ICCI","Hector Leon"));
-    CursosList.insertarFinal(new Curso("Programacion",30,"ICCI","Rabi"));
-    CursosList.insertarFinal(new Curso("Estadistica",50,"ICI","Bahamonde"));
-    CursosList.insertarFinal(new Curso("Economia",20,"ICI","Diego Rojas"));
-}
-
-
 int Sistema::CtrlErrInt(bool x) {
     int numero;
     while (true) {
@@ -294,9 +281,9 @@ void Sistema::DesInscribirAlumno() {
 
 
         for (int i = 0; i < Tam; i++) {
-            if (AuxInscripciones.getObject(i)->getCurso().getCodigo() == Curso) {
+            if (AuxInscripciones.getObject(i)->getCurso() -> getCodigo() == Curso) {
                 cout << "Curso Seleccionado: "<< endl;
-                AuxInscripciones.getObject(i) -> getCurso().mostrarInfo();
+                AuxInscripciones.getObject(i) -> getCurso() -> mostrarInfo();
                 cout << endl;
                 AuxCurso = AuxInscripciones.getObject(i);
                 Comprobador = true;
@@ -309,6 +296,7 @@ void Sistema::DesInscribirAlumno() {
 
 
 }
+
 void Sistema::RegistrarNota() {
     cout << "Entraste a Registrar Nota" << endl << endl;
 
@@ -341,9 +329,9 @@ void Sistema::RegistrarNota() {
 
 
         for (int i = 0; i < Tam; i++) {
-            if (AuxInscripciones.getObject(i)->getCurso().getCodigo() == Curso) {
+            if (AuxInscripciones.getObject(i) -> getCurso() -> getCodigo() == Curso) {
                 cout << "Curso Seleccionado: "<< endl;
-                AuxInscripciones.getObject(i) -> getCurso().mostrarInfo();
+                AuxInscripciones.getObject(i) -> getCurso() -> mostrarInfo();
                 cout << endl;
                 AuxCurso = i;
                 Comprobador = true;
@@ -369,15 +357,130 @@ void Sistema::RegistrarNota() {
 void Sistema::ReporteAlumnosxCarrera() {
     cout << "Entraste a Alumnos por Carrera" << endl << endl;
 
+    cout << "Ingrese Carrera que desee analizar: ";
+    string Carrera;
+    cin >> Carrera;
+    int cont = 1;
 
+    cout << "Alumnos de la carrera seleccionada (" << Carrera << "): " << endl;
+    for (int i = 0; i < AlumnosList.size(); i++) {
+        if (AlumnosList.getObject(i)->getCarrera() == Carrera) {
+            Alumno* Aux = AlumnosList.getObject(i);
+            cout << cont << ") " << "ID:" << Aux -> getId() << " Nombre: " << Aux -> getNombre() << " "<< Aux->getApellido() << endl;
+            cont +=1;
+        }
+    }
+
+    if (cont == 1) {cout << "No se encontraron Alumnos en la carrera indicada." << endl;};
+    cout << endl;
 }
 void Sistema::ReporteCursosxAlumno() {
     cout << "Entraste a Cursos por Alumno" << endl << endl;
+
+    cout << "Introduzca el ID del Alumno a analizar: ";
+
+    int Busqueda;
+    int n = 0;
+    bool Comprobador = false;
+    Busqueda = CtrlErrInt(false);
+
+    for (int i = 0; i < AlumnosList.size(); i++) {
+        if (AlumnosList.getObject(i)->getId() == Busqueda) {
+            int n = i;
+            cout << endl;
+            Comprobador = true;
+        }
+    }
+    if (Comprobador) {
+        cout << "Alumno Seleccionado: " << AlumnosList.getObject(n) -> getNombre() << " " << AlumnosList.getObject(n) -> getApellido() << endl;
+        AlumnosList.getObject(n)->ImprimirCursos();
+    }
+    else {
+        cout << "No se encontraron coincidencias" << endl;
+    }
 }
 void Sistema::ReportePromedioAlumnoxCurso() {
     cout << "Entraste a Promedio Alumno por Curso" << endl << endl;
+
+    cout << "Introduzca el ID o nombre: ";
+
+    string Busqueda;
+    cin >> Busqueda;
+    Alumno* AuxAlumno;
+
+    if (CompInt(Busqueda)) {
+        for (int i = 0; i < AlumnosList.size(); i++) {
+            if (AlumnosList.getObject(i)->getId() == stoi(Busqueda)) {
+                AuxAlumno = AlumnosList.getObject(i);
+                cout << endl;
+            }
+
+        }
+    }
+    else {
+        for (int i = 0; i < AlumnosList.size(); i++) {
+            if (AlumnosList.getObject(i)->getNombre() == Busqueda) {
+                AuxAlumno = AlumnosList.getObject(i);
+                cout << endl;
+            }
+        }
+    }
+
+    cout << "Introduzca el ID o nombre de el Curso: ";
+
+    Busqueda;
+    cin >> Busqueda;
+    Curso* AuxCurso;
+
+    if (CompInt(Busqueda)) {
+        for (int i = 0; i < CursosList.size(); i++) {
+            if (CursosList.getObject(i)->getCodigo() == stoi(Busqueda)) {
+                AuxCurso = CursosList.getObject(i);
+                cout << endl;
+            }
+
+        }
+    }
+    else {
+        for (int i = 0; i < CursosList.size(); i++) {
+            if (CursosList.getObject(i)->getNombre() == Busqueda) {
+                AuxCurso = CursosList.getObject(i);
+                cout << endl;
+            }
+        }
+    }
+
+    cout << "El promedio de " << AuxAlumno->getNombre() << " " << AuxAlumno->getApellido();
+    cout << "es :" << AuxAlumno -> CalcularPromedio(AuxCurso);
 }
+
 void Sistema::ReportePromedioAlumno() {
     cout << "Entraste a Promedio Alumno" << endl << endl;
+
+    cout << "Introduzca el ID o nombre: ";
+
+    string Busqueda;
+    int n=-1;
+    cin >> Busqueda;
+
+    if (CompInt(Busqueda)) {
+        for (int i = 0; i < AlumnosList.size(); i++) {
+            if (AlumnosList.getObject(i)->getId() == stoi(Busqueda)) {
+                int n = i;
+                cout << endl;
+            }
+
+        }
+    }
+    else {
+        for (int i = 0; i < AlumnosList.size(); i++) {
+            if (AlumnosList.getObject(i)->getNombre() == Busqueda) {
+                n = i;
+                cout << endl;
+            }
+        }
+    }
+    Alumno* Aux = AlumnosList.getObject(n);
+    cout << "El promedio de " << Aux->getNombre() << " " << Aux->getApellido() << " es :"<< Aux->CalcularPromedioGeneral();
 }
 Sistema::~Sistema() {}

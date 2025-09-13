@@ -35,6 +35,9 @@ public:
     void InscribirAlumno(Curso* C);
 
     void mostrarInfo();
+    void ImprimirCursos();
+    double CalcularPromedioGeneral();
+    double CalcularPromedio(Curso* C);
 
     ~Alumno();
 };

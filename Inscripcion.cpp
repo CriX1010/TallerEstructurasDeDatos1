@@ -6,11 +6,12 @@
 
 
 Inscripcion::Inscripcion(Curso *C) : CursoIns(*C){
+
 }
 Inscripcion::~Inscripcion() {}
 
-Curso Inscripcion::getCurso() {
-    return CursoIns;
+Curso* Inscripcion::getCurso() {
+    return &CursoIns;
 }
 
 LinkedList<double> Inscripcion::getNotas() {
@@ -18,6 +19,13 @@ LinkedList<double> Inscripcion::getNotas() {
 }
 void Inscripcion::AddNota(double e) {
     Notas.insertarFinal(e);
+}
+double Inscripcion::Promedio() {
+    double Suma = 0;
+    for (int i = 0 ; i < Notas.size(); i++) {
+        Suma += Notas.getObject(i);
+    }
+    return Suma/Notas.size();
 }
 
 

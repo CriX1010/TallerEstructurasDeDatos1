@@ -18,8 +18,6 @@ Sistema S;
 #include "Alumnos.h"
 int main() {
 
-    S.CrearDatosPrueba();
-
     int Comprobador = -1;
 
     while (Comprobador != 6) {

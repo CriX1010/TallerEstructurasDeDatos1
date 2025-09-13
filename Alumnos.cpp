@@ -44,4 +44,29 @@ void Alumno::mostrarInfo() {
 
 Alumno::~Alumno() { cout << "se elimino " << Nombre;}
 
+void Alumno::ImprimirCursos() {
+    cout << "Cursos Inscritos:" << endl;
+    for (int i = 0 ; i < Inscripciones.size(); i++) {
+        cout << i << ") " << Inscripciones.getObject(i)->getCurso()->getCodigo()<< endl;
+    }
+}
+
+double Alumno::CalcularPromedioGeneral()  {
+    double Suma = 0;
+    for (int i = 0 ; i < Inscripciones.size(); i++) {
+        Inscripcion* Aux = Inscripciones.getObject(i);
+        Suma += Aux -> Promedio();
+    }
+    return Suma/Inscripciones.size();
+}
+
+double Alumno::CalcularPromedio(Curso* C) {
+    Inscripcion* Aux;
+    for (int i = 0 ; i < Inscripciones.size(); i++) {
+        if (Inscripciones.getObject(i)->getCurso() == C) {
+            Aux = Inscripciones.getObject(i);
+        }
+    }
+    return Aux -> Promedio();
+}
 

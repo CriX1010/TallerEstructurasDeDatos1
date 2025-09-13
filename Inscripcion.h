@@ -7,13 +7,14 @@ private:
     Curso CursoIns;
 public:
 
-
     LinkedList<double> Notas;
 
     Inscripcion(Curso* C);
     ~Inscripcion();
 
-    Curso getCurso();
+    Curso* getCurso();
     LinkedList<double> getNotas();
     void AddNota(double e);
+    double Promedio();
 };
+
